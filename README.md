@@ -8,4 +8,10 @@ The project idea is inspired by of some existing application. I try to adapted t
 
 - [Monkeytype](https://monkeytype.com/)
 - [Duolingo](https://www.duolingo.com/)
-- ...
+- Wibawa, J. A. E., Sarin, S., Li, C. F., Pipatsrisawat, K.,
+Sodimana, K., Kjartansson, O., Gutkin, A., Jansche, M., & Ha, L.
+(2018). *Building Open Javanese and Sundanese Corpora for Multilingual
+Text-to-Speech*. Proceedings of the Eleventh International Conference
+on Language Resources and Evaluation (LREC 2018), 1610–1614.
+http://www.lrec-conf.org/proceedings/lrec2018/pdf/8888.pdf
+-...
