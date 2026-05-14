@@ -8,6 +8,8 @@ import Word from '@/components/Word';
 import Results from '@/components/Results';
 import Footer from '@/components/Footer';
 import ScriptReference from '@/components/ScriptReference';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
 
 export default function App() {
   const [words, setWords] = useState<WordData[]>([]);
@@ -238,8 +240,9 @@ export default function App() {
         className="sm:hidden fixed bottom-6 right-6 z-40 w-14 h-14 bg-main-monkey text-bg-monkey rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.4)] flex items-center justify-center animate-pulse-subtle active:scale-90 transition-transform"
         aria-label="Open Character Guide"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z"></path></svg>
+        <FontAwesomeIcon icon={faBook} className="w-6 h-6" />
       </button>
     </div>
   );
 }
+

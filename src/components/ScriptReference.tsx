@@ -1,4 +1,6 @@
 import { NGLEGENA, SANDHANGAN_SWARA, SANDHANGAN_PANYIGEG } from '@/data/reference';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function ScriptReference({ 
   isOpen, onClose 
@@ -23,7 +25,7 @@ export default function ScriptReference({
             className="text-sub-monkey hover:text-text-monkey transition-colors p-1"
             aria-label="Close guide"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <FontAwesomeIcon icon={faXmark} className="w-5 h-5" />
           </button>
         </div>
 
@@ -82,3 +84,4 @@ export default function ScriptReference({
     </>
   );
 }
+
