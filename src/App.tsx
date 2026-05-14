@@ -6,6 +6,7 @@ import { generateWords } from '@/data/words';
 import Header from '@/components/Header';
 import Word from '@/components/Word';
 import Results from '@/components/Results';
+import Footer from '@/components/Footer';
 
 export default function App() {
   const [words, setWords] = useState<WordData[]>([]);
@@ -156,8 +157,8 @@ export default function App() {
   }, [userInput, currentWordIndex, words, mode]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center overflow-hidden p-4 md:p-8 pt-4 md:pt-24" onClick={() => inputRef.current?.focus()}>
-      <div className="w-full max-w-5xl flex flex-col gap-4 md:gap-8">
+    <div className="min-h-screen flex flex-col items-center overflow-hidden p-4 md:p-8 pt-4 md:pt-12" onClick={() => inputRef.current?.focus()}>
+      <div className="w-full max-w-5xl flex-1 flex flex-col gap-4 md:gap-8">
         <Header mode={mode} setMode={setMode} wpm={wpm} accuracy={accuracy} />
 
         <div className="relative h-[400px] md:h-[500px] overflow-hidden select-none pt-4 md:pt-24" ref={typingAreaRef}>
@@ -205,6 +206,8 @@ export default function App() {
             <span className="md:hidden">tap words to focus keyboard</span>
           </div>
         )}
+
+        <Footer />
       </div>
     </div>
   );
