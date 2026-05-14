@@ -33,7 +33,7 @@ export default function ScriptReference({
           {/* Aksara Nglegena */}
           <section>
             <h3 className="text-xs font-ui text-main-monkey mb-4 uppercase tracking-[0.2em] font-bold">Aksara Nglegena</h3>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-5 gap-2">
               {NGLEGENA.map((char) => (
                 <div key={char.latin} className="flex flex-col items-center bg-[#2c2e31] py-3 rounded-lg border border-transparent hover:border-main-monkey/30 transition-all">
                   <span className="text-2xl text-text-monkey mb-1 font-javanese">{char.script}</span>

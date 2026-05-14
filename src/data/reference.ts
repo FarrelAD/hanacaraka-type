@@ -5,10 +5,26 @@ export interface ReferenceChar {
 }
 
 export const NGLEGENA: ReferenceChar[] = [
-  { script: 'ꦲ', latin: 'ha' }, { script: 'ꦤ', latin: 'na' }, { script: 'ꦕ', latin: 'ca' }, { script: 'ꦫ', latin: 'ra' }, { script: 'ꦏ', latin: 'ka' },
-  { script: 'ꦢ', latin: 'da' }, { script: 'ꦠ', latin: 'ta' }, { script: 'ꦱ', latin: 'sa' }, { script: 'ꦮ', latin: 'wa' }, { script: 'ꦭ', latin: 'la' },
-  { script: 'ꦥ', latin: 'pa' }, { script: 'ꦝ', latin: 'dha' }, { script: 'ꦗ', latin: 'ja' }, { script: 'ꦶ', latin: 'ya' }, { script: 'ꦚ', latin: 'nya' },
-  { script: 'ꦩ', latin: 'ma' }, { script: 'ꦒ', latin: 'ga' }, { script: 'ꦧ', latin: 'ba' }, { script: 'ꦛ', latin: 'tha' }, { script: 'ꦔ', latin: 'nga' }
+  { script: 'ꦲ', latin: 'ha' }, 
+  { script: 'ꦤ', latin: 'na' }, 
+  { script: 'ꦕ', latin: 'ca' }, 
+  { script: 'ꦫ', latin: 'ra' }, 
+  { script: 'ꦏ', latin: 'ka' },
+  { script: 'ꦢ', latin: 'da' }, 
+  { script: 'ꦠ', latin: 'ta' }, 
+  { script: 'ꦱ', latin: 'sa' }, 
+  { script: 'ꦮ', latin: 'wa' }, 
+  { script: 'ꦭ', latin: 'la' },
+  { script: 'ꦥ', latin: 'pa' }, 
+  { script: 'ꦝ', latin: 'dha' }, 
+  { script: 'ꦗ', latin: 'ja' }, 
+  { script: 'ꦪ', latin: 'ya' }, 
+  { script: 'ꦚ', latin: 'nya' },
+  { script: 'ꦩ', latin: 'ma' }, 
+  { script: 'ꦒ', latin: 'ga' }, 
+  { script: 'ꦧ', latin: 'ba' }, 
+  { script: 'ꦛ', latin: 'tha' }, 
+  { script: 'ꦔ', latin: 'nga' }
 ];
 
 export const SANDHANGAN_SWARA: ReferenceChar[] = [
