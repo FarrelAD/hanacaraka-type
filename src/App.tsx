@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import '@/index.css';
 import type { WordData, Mode, WordLimit } from '@/types';
 import { splitIntoGraphemes } from '@/utils/javanese';
 import { generateWords, getRandomWord } from '@/data/words';
