@@ -102,42 +102,55 @@ export default function App() {
 
   const [caretPos, setCaretPos] = useState({ left: 0, top: 0 });
 
+  // Update caret position and handle scrolling
   useEffect(() => {
-    if (activeWordRef.current && typingAreaRef.current) {
-      const targetRowClass = mode === 'hanacaraka' ? '.javanese-row' : '.latin-row';
-      const targetContainer = activeWordRef.current.querySelector(targetRowClass);
+    if (activeWordRef.current && wordsWrapperRef.current) {
+      const targetContainer = activeWordRef.current.querySelector('.javanese-row');
       if (!targetContainer) return;
 
       const charElements = targetContainer.querySelectorAll('.char');
-      const containerRect = typingAreaRef.current.getBoundingClientRect();
       
-      let charIndex = userInput.length;
-      
-      if (mode === 'hanacaraka') {
-        const currentWord = words[currentWordIndex];
-        const javaneseGraphemes = splitIntoGraphemes(currentWord.javanese);
-        const progress = userInput.length / currentWord.latin.length;
-        charIndex = Math.min(Math.floor(progress * javaneseGraphemes.length), javaneseGraphemes.length);
-      }
+      const currentWord = words[currentWordIndex];
+      if (!currentWord) return;
+
+      const javaneseGraphemes = splitIntoGraphemes(currentWord.javanese);
+      const progress = userInput.length / currentWord.latin.length;
+      const charIndex = Math.min(Math.floor(progress * javaneseGraphemes.length), javaneseGraphemes.length);
+
+      // We explicitly calculate offsets relative to words-wrapper
+      // OffsetParent check to ensure we are relative to what we think we are
+      const activeWordOffsetLeft = activeWordRef.current.offsetLeft;
+      const activeWordOffsetTop = activeWordRef.current.offsetTop;
 
       if (charIndex === 0) {
         const firstChar = charElements[0] as HTMLElement;
         if (firstChar) {
-          const charRect = firstChar.getBoundingClientRect();
           setCaretPos({
-            left: charRect.left - containerRect.left,
-            top: charRect.top - containerRect.top
+            left: activeWordOffsetLeft + firstChar.offsetLeft,
+            top: activeWordOffsetTop + firstChar.offsetTop
+          });
+        } else {
+          setCaretPos({
+            left: activeWordOffsetLeft,
+            top: activeWordOffsetTop
           });
         }
       } else {
         const prevChar = charElements[Math.min(charIndex - 1, charElements.length - 1)] as HTMLElement;
         if (prevChar) {
-          const charRect = prevChar.getBoundingClientRect();
           setCaretPos({
-            left: charRect.right - containerRect.left,
-            top: charRect.top - containerRect.top
+            left: activeWordOffsetLeft + prevChar.offsetLeft + prevChar.offsetWidth,
+            top: activeWordOffsetTop + prevChar.offsetTop
           });
         }
+      }
+
+      // --- Scrolling Logic ---
+      const rowHeight = 120;
+      if (activeWordOffsetTop > rowHeight) {
+        wordsWrapperRef.current.style.transform = `translateY(-${activeWordOffsetTop - rowHeight}px)`;
+      } else {
+        wordsWrapperRef.current.style.transform = 'translateY(0)';
       }
     }
   }, [userInput, currentWordIndex, words, mode]);
@@ -147,7 +160,7 @@ export default function App() {
       <div className="w-full max-w-5xl flex flex-col gap-4 md:gap-8">
         <Header mode={mode} setMode={setMode} wpm={wpm} accuracy={accuracy} />
 
-        <div className="relative h-[450px] md:h-[500px] overflow-hidden select-none pt-4 md:pt-24" ref={typingAreaRef}>
+        <div className="relative h-[400px] md:h-[500px] overflow-hidden select-none pt-4 md:pt-24" ref={typingAreaRef}>
           {isFinished ? (
             <div className="h-full" onClick={restart}>
               <Results wpm={wpm} accuracy={accuracy} />
@@ -165,9 +178,10 @@ export default function App() {
                 inputMode={mode === 'latin' ? 'text' : 'none'}
               />
               
-              <div className="caret" style={{ left: caretPos.left, top: caretPos.top }}></div>
+              {/* Ensure words-wrapper is the relative anchor for the caret */}
+              <div className="words-wrapper relative flex flex-wrap gap-x-4 md:gap-x-8 gap-y-8 md:gap-y-16 transition-transform duration-300 ease-in-out" ref={wordsWrapperRef}>
+                <div className="caret" style={{ left: caretPos.left, top: caretPos.top }}></div>
 
-              <div className="words-wrapper flex flex-wrap gap-x-4 md:gap-x-8 gap-y-8 md:gap-y-16 transition-transform duration-200" ref={wordsWrapperRef}>
                 {words.map((wordData, wIdx) => (
                   <Word 
                     key={wIdx}

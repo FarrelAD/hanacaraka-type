@@ -21,7 +21,6 @@ export default function Word({
   const javaneseSegments = splitIntoGraphemes(wordData.javanese);
   const latinSegments = wordData.latin.split('');
   
-  // CRITICAL: Only use input that belongs to THIS word
   const currentTyped = isPast ? typedHistory : (isActive ? userInput : '');
   const typedSegments = currentTyped.split('');
 
@@ -39,8 +38,6 @@ export default function Word({
           const prevThreshold = sIdx / javaneseSegments.length;
 
           if (currentTyped.length > 0 && progress >= prevThreshold) {
-            // Check if the typed portion matching this segment is correct
-            // We use a simple proportional slice of the Latin word
             const startIdx = Math.floor(prevThreshold * wordData.latin.length);
             const endIdx = Math.ceil(threshold * wordData.latin.length);
             const targetPart = wordData.latin.slice(startIdx, endIdx);
@@ -48,7 +45,7 @@ export default function Word({
 
             if (typedPart.length > 0) {
               if (targetPart.startsWith(typedPart)) {
-                status = progress >= threshold ? 'correct' : '';
+                status = progress >= threshold ? 'correct' : 'partial';
               } else {
                 status = 'incorrect';
               }
@@ -63,16 +60,23 @@ export default function Word({
         })}
       </div>
 
-      {/* Latin Script Row */}
-      <div className={`latin-row font-ui text-sm md:text-lg leading-none h-4 md:h-6 flex items-center ${mode === 'hanacaraka' ? 'opacity-30' : ''}`}>
+      {/* Latin Script Row (The Hint) */}
+      <div className={`latin-row font-ui text-sm md:text-lg leading-none h-4 md:h-6 flex items-center transition-opacity duration-300 ${mode === 'hanacaraka' && !isPast ? 'opacity-0' : 'opacity-100'}`}>
         {latinSegments.map((char, cIdx) => {
           let status = '';
+          let isVisible = true;
+
+          // In Hanacaraka mode, hide the Latin hint for everything EXCEPT finished words
+          if (mode === 'hanacaraka' && !isPast) {
+            isVisible = false;
+          }
+
           if (cIdx < typedSegments.length) {
             status = typedSegments[cIdx] === char ? 'correct' : 'incorrect';
           }
           
           return (
-            <span key={cIdx} className={`char ${status}`}>
+            <span key={cIdx} className={`char ${status} ${!isVisible ? 'opacity-0' : 'opacity-100'}`}>
               {char}
             </span>
           );

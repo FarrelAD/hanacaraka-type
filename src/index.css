@@ -52,6 +52,10 @@
   @apply text-text-monkey;
 }
 
+.char.partial {
+  @apply text-text-monkey/50;
+}
+
 .char.incorrect {
   @apply text-error-monkey;
 }
