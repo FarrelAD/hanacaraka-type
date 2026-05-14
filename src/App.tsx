@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import '@/index.css';
-import type { WordData, Mode } from '@/types';
+import type { WordData, Mode, WordLimit } from '@/types';
 import { splitIntoGraphemes } from '@/utils/javanese';
-import { generateWords } from '@/data/words';
+import { generateWords, getRandomWord } from '@/data/words';
 import Header from '@/components/Header';
 import Word from '@/components/Word';
 import Results from '@/components/Results';
@@ -19,6 +19,7 @@ export default function App() {
   const [totalCharsTyped, setTotalCharsTyped] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   const [mode, setMode] = useState<Mode>('latin');
+  const [wordLimit, setWordLimit] = useState<WordLimit>(25);
   
   const inputRef = useRef<HTMLInputElement>(null);
   const wordsWrapperRef = useRef<HTMLDivElement>(null);
@@ -27,10 +28,11 @@ export default function App() {
 
   useEffect(() => {
     restart();
-  }, [mode]);
+  }, [mode, wordLimit]);
 
   const restart = () => {
-    setWords(generateWords());
+    const initialCount = wordLimit === 'infinite' ? 50 : wordLimit;
+    setWords(generateWords(initialCount));
     setCurrentWordIndex(0);
     setUserInput('');
     setHistory([]);
@@ -68,7 +70,12 @@ export default function App() {
       // Store the typed word in history before moving on
       setHistory(prev => [...prev, typedWord]);
 
-      if (currentWordIndex === words.length - 1) {
+      if (wordLimit === 'infinite') {
+        // Append a new word if we're in infinite mode
+        setWords(prev => [...prev, getRandomWord()]);
+        setCurrentWordIndex(prev => prev + 1);
+        setUserInput('');
+      } else if (currentWordIndex === words.length - 1) {
         setEndTime(Date.now());
         setIsFinished(true);
       } else {
@@ -159,7 +166,14 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col items-center overflow-hidden p-4 md:p-8 pt-4 md:pt-12" onClick={() => inputRef.current?.focus()}>
       <div className="w-full max-w-5xl flex-1 flex flex-col gap-4 md:gap-8">
-        <Header mode={mode} setMode={setMode} wpm={wpm} accuracy={accuracy} />
+        <Header 
+          mode={mode} 
+          setMode={setMode} 
+          wordLimit={wordLimit}
+          setWordLimit={setWordLimit}
+          wpm={wpm} 
+          accuracy={accuracy} 
+        />
 
         <div className="relative h-[400px] md:h-[500px] overflow-hidden select-none pt-4 md:pt-24" ref={typingAreaRef}>
           {isFinished ? (

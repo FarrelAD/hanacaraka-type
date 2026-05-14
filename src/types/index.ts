@@ -4,3 +4,5 @@ export interface WordData {
 }
 
 export type Mode = 'hanacaraka' | 'latin';
+
+export type WordLimit = 10 | 25 | 50 | 100 | 'infinite';
