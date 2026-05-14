@@ -195,7 +195,11 @@ export default function App() {
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 autoFocus
-                inputMode={mode === 'latin' ? 'text' : 'none'}
+                inputMode="text"
+                autoCapitalize="none"
+                autoCorrect="off"
+                spellCheck={false}
+                autoComplete="off"
               />
               
               {/* Ensure words-wrapper is the relative anchor for the caret */}
