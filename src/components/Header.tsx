@@ -6,7 +6,8 @@ export default function Header({
   wordLimit,
   setWordLimit,
   wpm, 
-  accuracy 
+  accuracy,
+  onOpenReference
 }: { 
   mode: Mode; 
   setMode: (mode: Mode) => void; 
@@ -14,14 +15,25 @@ export default function Header({
   setWordLimit: (limit: WordLimit) => void;
   wpm: number; 
   accuracy: number; 
+  onOpenReference: () => void;
 }) {
   const limits: WordLimit[] = [10, 25, 50, 100, 'infinite'];
 
   return (
     <header className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 mb-2 md:mb-8">
       <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-8">
-        <div className="text-2xl md:text-3xl font-bold text-text-monkey">
-          hanacaraka<span className="text-main-monkey">type</span>
+        <div className="flex items-center gap-4">
+          <div className="text-2xl md:text-3xl font-bold text-text-monkey">
+            hanacaraka<span className="text-main-monkey">type</span>
+          </div>
+          <button 
+            onClick={(e) => { e.stopPropagation(); onOpenReference(); }}
+            className="hidden sm:flex items-center gap-2 px-4 py-1.5 text-xs font-ui bg-main-monkey text-bg-monkey rounded-lg border border-main-monkey/50 shadow-[0_0_15px_rgba(209,177,15,0.2)] hover:shadow-[0_0_20px_rgba(209,177,15,0.4)] transition-all cursor-pointer animate-pulse-subtle group"
+            title="Open Character Guide"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:rotate-12 transition-transform"><path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z"></path></svg>
+            <span className="font-black uppercase tracking-widest">Guide</span>
+          </button>
         </div>
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
           <nav className="flex gap-2 text-xs md:text-sm font-ui bg-[#2c2e31] p-1 rounded-lg">
