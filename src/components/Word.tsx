@@ -24,16 +24,11 @@ export default function Word({
   const currentTyped = isPast ? typedHistory : (isActive ? userInput : '');
   const typedSegments = currentTyped.split('');
 
-  // In Hanacaraka mode, we only want to show the Latin hints for words that have been completed.
-  // Future and Active words should have their hints hidden to maintain the "guessing" challenge.
-  const showLatinHint = mode === 'latin' || isPast;
-
   return (
     <div 
       className={`word flex flex-col items-center gap-1 md:gap-2 ${isActive ? 'active' : ''} transition-opacity duration-300 ${!isActive && !isPast ? 'opacity-50' : 'opacity-100'}`}
       ref={isActive ? activeWordRef : null}
     >
-      {/* Javanese Script Row */}
       <div className="javanese-row font-javanese text-2xl md:text-[2.5rem] leading-none block whitespace-nowrap h-10 md:h-16 relative">
         {javaneseSegments.map((segment, sIdx) => {
           let status = '';
@@ -49,7 +44,7 @@ export default function Word({
 
             if (typedPart.length > 0) {
               if (targetPart.startsWith(typedPart)) {
-                status = progress >= threshold ? 'correct' : 'partial';
+                status = progress >= threshold ? 'correct' : '';
               } else {
                 status = 'incorrect';
               }
@@ -64,9 +59,7 @@ export default function Word({
         })}
       </div>
 
-      {/* Latin Script Row (The Hint) */}
-      {/* We use a conditional opacity and a boolean check to ensure hints are strictly hidden when they should be */}
-      <div className={`latin-row font-ui text-sm md:text-lg leading-none h-4 md:h-6 flex items-center transition-opacity duration-300 ${showLatinHint ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      <div className={`latin-row font-ui text-sm md:text-lg leading-none h-4 md:h-6 flex items-center ${mode === 'hanacaraka' ? 'opacity-30' : ''}`}>
         {latinSegments.map((char, cIdx) => {
           let status = '';
           if (cIdx < typedSegments.length) {

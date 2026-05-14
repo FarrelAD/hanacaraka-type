@@ -1,80 +1,75 @@
-import type { Mode, WordLimit } from '@/types';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import ScriptReference from '@/components/ScriptReference';
 
-export default function Header({ 
-  mode, 
-  setMode, 
-  wordLimit,
-  setWordLimit,
-  wpm, 
-  accuracy,
-  onOpenReference
-}: { 
-  mode: Mode; 
-  setMode: (mode: Mode) => void; 
-  wordLimit: WordLimit;
-  setWordLimit: (limit: WordLimit) => void;
-  wpm: number; 
-  accuracy: number; 
-  onOpenReference: () => void;
-}) {
-  const limits: WordLimit[] = [10, 25, 50, 100, 'infinite'];
+export default function Header() {
+  const location = useLocation();
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
+
+  const isHome = location.pathname === '/';
 
   return (
-    <header className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 mb-2 md:mb-8">
-      <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-8">
-        <div className="flex items-center gap-4">
-          <div className="text-2xl md:text-3xl font-bold text-text-monkey">
-            hanacaraka<span className="text-main-monkey">type</span>
-          </div>
-          <button 
-            onClick={(e) => { e.stopPropagation(); onOpenReference(); }}
-            className="hidden sm:flex items-center gap-2 px-4 py-1.5 text-xs font-ui bg-main-monkey text-bg-monkey rounded-lg border border-main-monkey/50 shadow-[0_0_15px_rgba(209,177,15,0.2)] hover:shadow-[0_0_20px_rgba(209,177,15,0.4)] transition-all cursor-pointer animate-pulse-subtle group"
-            title="Open Character Guide"
-          >
-            <FontAwesomeIcon icon={faBook} className="group-hover:rotate-12 transition-transform w-[14px] h-[14px]" />
-            <span className="font-black uppercase tracking-widest">Guide</span>
-          </button>
+    <>
+      <header className="w-full px-6 lg:px-12 pt-8 md:pt-12 flex flex-wrap gap-4 items-center justify-between">
+        <div className="flex items-center gap-6">
+          <Link to="/" className="flex items-center gap-3">
+            <h1 className="text-xl md:text-2xl font-bold text-text-monkey font-ui tracking-tighter">
+              hanacaraka<span className="text-main-monkey">type</span>
+            </h1>
+          </Link>
+          
+          {!isHome && (
+            <button
+              type="button"
+              onClick={() => setIsGuideOpen(true)}
+              className="flex items-center gap-2 bg-main-monkey text-bg-monkey px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-opacity"
+            >
+              <FontAwesomeIcon icon={faBook} />
+              Guide
+            </button>
+          )}
         </div>
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-          <nav className="flex gap-2 text-xs md:text-sm font-ui bg-[#2c2e31] p-1 rounded-lg">
-            <button 
-              onClick={(e) => { e.stopPropagation(); setMode('latin'); }}
-              className={`px-3 py-1 rounded transition-colors cursor-pointer ${mode === 'latin' ? 'bg-main-monkey text-bg-monkey' : 'text-sub-monkey hover:text-text-monkey'}`}
-            >
-              latin
-            </button>
-            <button 
-              onClick={(e) => { e.stopPropagation(); setMode('hanacaraka'); }}
-              className={`px-3 py-1 rounded transition-colors cursor-pointer ${mode === 'hanacaraka' ? 'bg-main-monkey text-bg-monkey' : 'text-sub-monkey hover:text-text-monkey'}`}
-            >
-              hanacaraka
-            </button>
-          </nav>
 
-          <nav className="flex gap-2 text-xs md:text-sm font-ui bg-[#2c2e31] p-1 rounded-lg">
-            {limits.map((limit) => (
-              <button 
-                key={limit}
-                onClick={(e) => { e.stopPropagation(); setWordLimit(limit); }}
-                className={`px-3 py-1 rounded transition-colors cursor-pointer ${wordLimit === limit ? 'bg-main-monkey text-bg-monkey' : 'text-sub-monkey hover:text-text-monkey'}`}
+        <nav className="flex items-center gap-4 md:gap-6">
+          {!isHome && (
+            <>
+              <Link 
+                to="/typing" 
+                className={`text-xs font-ui font-bold uppercase tracking-widest transition-colors hidden sm:block ${
+                  location.pathname === '/typing' ? 'text-main-monkey' : 'text-sub-monkey hover:text-text-monkey'
+                }`}
               >
-                {limit}
-              </button>
-            ))}
-          </nav>
-        </div>
-      </div>
-      <div className="flex gap-4 md:gap-12 text-lg md:text-2xl text-sub-monkey">
-        <div className="flex gap-2">
-          wpm: <span className="text-main-monkey font-bold">{wpm}</span>
-        </div>
-        <div className="flex gap-2">
-          acc: <span className="text-main-monkey font-bold">{accuracy}%</span>
-        </div>
-      </div>
-    </header>
+                Typing
+              </Link>
+              <Link 
+                to="/puzzle" 
+                className={`text-xs font-ui font-bold uppercase tracking-widest transition-colors hidden sm:block ${
+                  location.pathname === '/puzzle' ? 'text-main-monkey' : 'text-sub-monkey hover:text-text-monkey'
+                }`}
+              >
+                Puzzle
+              </Link>
+            </>
+          )}
+          <a 
+            href="https://github.com/FarrelAD/hanacaraka-type" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-sub-monkey hover:text-main-monkey transition-colors p-1 ml-2"
+            title="View Source"
+          >
+            <FontAwesomeIcon icon={faGithub} className="w-5 h-5" />
+          </a>
+        </nav>
+      </header>
+
+      <ScriptReference 
+        isOpen={isGuideOpen} 
+        onClose={() => setIsGuideOpen(false)} 
+      />
+    </>
   );
 }
-

@@ -4,5 +4,18 @@ export interface WordData {
 }
 
 export type Mode = 'hanacaraka' | 'latin';
+export type GameMode = 'typing' | 'puzzle';
 
-export type WordLimit = 10 | 25 | 50 | 100 | 'infinite';
+export interface PuzzlePiece {
+  id: string;
+  char: string;
+  type: 'base' | 'front' | 'top' | 'bottom' | 'rear';
+  name: string;
+}
+
+export interface PuzzleLevel {
+  id: string;
+  targetLatin: string;
+  targetJavanese: string;
+  pieces: PuzzlePiece[];
+}
