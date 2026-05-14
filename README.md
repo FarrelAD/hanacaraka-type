@@ -1,5 +1,8 @@
 # Hanacaraka Typing Test Game
 
+<img width="2560" height="1170" alt="image" src="https://github.com/user-attachments/assets/aa4fa111-c081-4411-97c9-fac8cf16ba79" />
+
+
 A simple game to learn Javanese script, "Hanacaraka", that bring to you on website application. The idea is simple. How about we try to type the Javanese script as fast as we can in a given time? The longer you play, you will more easily to recognize Javanese script.
 
 ## References
