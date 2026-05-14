@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import './index.css';
-import type { WordData, Mode } from './types';
-import { splitIntoGraphemes } from './utils/javanese';
-import { generateWords } from './data/words';
-import Header from './components/Header';
-import Word from './components/Word';
-import Results from './components/Results';
+import '@/index.css';
+import type { WordData, Mode } from '@/types';
+import { splitIntoGraphemes } from '@/utils/javanese';
+import { generateWords } from '@/data/words';
+import Header from '@/components/Header';
+import Word from '@/components/Word';
+import Results from '@/components/Results';
 
 export default function App() {
   const [words, setWords] = useState<WordData[]>([]);

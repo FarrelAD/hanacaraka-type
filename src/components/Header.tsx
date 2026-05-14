@@ -1,4 +1,4 @@
-import type { Mode } from '../types';
+import type { Mode } from '@/types';
 
 export default function Header({ 
   mode, 

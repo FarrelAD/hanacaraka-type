@@ -1,5 +1,5 @@
-import type { WordData, Mode } from '../types';
-import { splitIntoGraphemes } from '../utils/javanese';
+import type { WordData, Mode } from '@/types';
+import { splitIntoGraphemes } from '@/utils/javanese';
 
 export default function Word({ 
   wordData, 

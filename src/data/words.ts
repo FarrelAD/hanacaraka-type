@@ -1,4 +1,4 @@
-import type { WordData } from '../types';
+import type { WordData } from '@/types';
 
 export const JAVANESE_WORDS_DATA: WordData[] = [
   { javanese: 'ꦲꦤꦕꦫꦏ', latin: 'hanacaraka' },
