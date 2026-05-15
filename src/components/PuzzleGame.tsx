@@ -6,6 +6,10 @@ import {
   useDroppable, 
   closestCenter,
   DragOverlay,
+  useSensor,
+  useSensors,
+  PointerSensor,
+  TouchSensor,
   type DragEndEvent,
   type DragStartEvent
 } from '@dnd-kit/core';
@@ -116,7 +120,7 @@ function DraggablePiece({
       style={style}
       {...listeners}
       {...attributes}
-      className={`${className} transition-opacity duration-200 cursor-grab active:cursor-grabbing`}
+      className={`${className} transition-opacity duration-200 cursor-grab active:cursor-grabbing touch-none`}
     >
       <JavanesePieceDisplay char={piece.char} type={piece.type} className="text-4xl md:text-5xl font-javanese" />
     </div>
@@ -182,6 +186,20 @@ export default function PuzzleGame() {
 
   const currentLevel = PUZZLE_LEVELS[currentLevelIdx];
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 150,
+        tolerance: 5,
+      },
+    })
+  );
+
   const handleDragStart = (event: DragStartEvent) => {
     setActivePiece(event.active.data.current?.piece as PuzzlePiece);
   };
@@ -244,7 +262,7 @@ export default function PuzzleGame() {
   const hasAnyPiece = Object.values(placedPieces).some(p => p !== null);
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className="w-full h-full flex flex-col justify-center items-center gap-6 md:gap-8 py-4 px-2">
         <div className="text-center">
           <h2 className="text-sub-monkey text-xs uppercase tracking-[0.2em] mb-2 opacity-40">Puzzle Mode</h2>
