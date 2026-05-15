@@ -9,7 +9,7 @@ export default function Home() {
         {/* Typing Practice Card */}
         <Link 
           to="/typing"
-          className="flex flex-col items-center justify-center p-8 bg-bg-monkey/20 rounded-2xl border border-sub-monkey/10 hover:border-main-monkey/50 transition-colors duration-200"
+          className="flex flex-col items-center justify-center p-8 bg-bg-monkey/20 rounded-2xl border border-sub-monkey/40 hover:border-main-monkey/50 hover:bg-bg-monkey/30 transition-all duration-200 hover:-translate-y-1"
         >
           <div className="mb-4 text-sub-monkey">
             <FontAwesomeIcon icon={faKeyboard} className="h-10 w-10" />
@@ -22,7 +22,7 @@ export default function Home() {
         {/* Cluster Puzzle Card */}
         <Link 
           to="/puzzle"
-          className="flex flex-col items-center justify-center p-8 bg-bg-monkey/20 rounded-2xl border border-sub-monkey/10 hover:border-main-monkey/50 transition-colors duration-200"
+          className="flex flex-col items-center justify-center p-8 bg-bg-monkey/20 rounded-2xl border border-sub-monkey/40 hover:border-main-monkey/50 hover:bg-bg-monkey/30 transition-all duration-200 hover:-translate-y-1"
         >
           <div className="mb-4 text-sub-monkey">
             <FontAwesomeIcon icon={faPuzzlePiece} className="h-10 w-10" />
