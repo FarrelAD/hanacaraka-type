@@ -59,7 +59,7 @@ export default function Word({
         })}
       </div>
 
-      <div className={`latin-row font-ui text-sm md:text-lg leading-none h-4 md:h-6 flex items-center ${mode === 'hanacaraka' ? 'opacity-30' : ''}`}>
+      <div className={`latin-row font-ui text-sm md:text-lg leading-none h-4 md:h-6 flex items-center ${mode === 'hanacaraka' && !isPast ? 'opacity-0' : ''}`}>
         {latinSegments.map((char, cIdx) => {
           let status = '';
           if (cIdx < typedSegments.length) {

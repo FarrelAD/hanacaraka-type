@@ -17,8 +17,11 @@ export default function TypingGame() {
   const [mode, setMode] = useState<Mode>('latin');
   const [wordLimit, setWordLimit] = useState<number | 'infinite'>(25);
   const [history, setHistory] = useState<string[]>([]);
+  const [caretPos, setCaretPos] = useState({ left: 0, top: 0 });
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const activeWordRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const generateWordList = useCallback((limit: number | 'infinite') => {
     const actualLimit = limit === 'infinite' ? 50 : limit;
@@ -43,7 +46,43 @@ export default function TypingGame() {
 
   useEffect(() => {
     resetGame();
-  }, [resetGame]);
+  }, [resetGame, mode]);
+
+  useEffect(() => {
+    if (activeWordRef.current && containerRef.current) {
+      const activeWord = activeWordRef.current;
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const currentWordData = words[currentIndex];
+      
+      if (!currentWordData) return;
+
+      const javaneseElements = activeWord.querySelectorAll('.javanese-row .char');
+      if (javaneseElements.length === 0) return;
+
+      const progress = userInput.length / currentWordData.latin.length;
+      const targetIndex = Math.floor(progress * javaneseElements.length);
+
+      if (targetIndex < javaneseElements.length && userInput.length < currentWordData.latin.length) {
+        const charElement = javaneseElements[targetIndex] as HTMLElement;
+        if (charElement) {
+          const charRect = charElement.getBoundingClientRect();
+          setCaretPos({
+            left: charRect.left - containerRect.left,
+            top: charRect.top - containerRect.top
+          });
+        }
+      } else {
+        const lastChar = javaneseElements[javaneseElements.length - 1] as HTMLElement;
+        if (lastChar) {
+          const charRect = lastChar.getBoundingClientRect();
+          setCaretPos({
+            left: charRect.right - containerRect.left,
+            top: charRect.top - containerRect.top
+          });
+        }
+      }
+    }
+  }, [userInput, currentIndex, words, mode]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -152,6 +191,7 @@ export default function TypingGame() {
           <div 
             className="relative p-6 md:p-8 rounded-2xl bg-bg-monkey/20 border border-sub-monkey/5 cursor-text min-h-[180px] md:min-h-[220px]"
             onClick={() => inputRef.current?.focus()}
+            ref={containerRef}
           >
             <input
               ref={inputRef}
@@ -165,6 +205,8 @@ export default function TypingGame() {
               spellCheck="false"
             />
             
+            <div className="caret" style={{ left: caretPos.left, top: caretPos.top }}></div>
+
             <div className="flex flex-wrap gap-x-4 gap-y-2 md:gap-x-6 md:gap-y-4 text-2xl md:text-3xl leading-relaxed transition-all duration-300">
               {words.map((wordData, index) => (
                 <Word
@@ -175,6 +217,7 @@ export default function TypingGame() {
                   isPast={index < currentIndex}
                   mode={mode}
                   typedHistory={history[index] || ''}
+                  activeWordRef={index === currentIndex ? activeWordRef : undefined}
                 />
               ))}
             </div>
