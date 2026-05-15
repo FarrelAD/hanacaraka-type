@@ -25,7 +25,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setIsGuideOpen(true)}
-              className="flex items-center gap-2 bg-main-monkey text-bg-monkey px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-opacity"
+              className="flex items-center gap-2 bg-main-monkey text-bg-monkey px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-opacity hover:cursor-pointer"
             >
               <FontAwesomeIcon icon={faBook} />
               Guide

@@ -10,7 +10,6 @@ export default function TypingGame() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [wpm, setWpm] = useState(0);
-  const [accuracy, setAccuracy] = useState(100);
   const [isFinished, setIsFinished] = useState(false);
   const [mistakes, setMistakes] = useState(0);
   const [typedChars, setTypedChars] = useState(0);
@@ -18,10 +17,17 @@ export default function TypingGame() {
   const [wordLimit, setWordLimit] = useState<number | 'infinite'>(25);
   const [history, setHistory] = useState<string[]>([]);
   const [caretPos, setCaretPos] = useState({ left: 0, top: 0 });
+  const [translateY, setTranslateY] = useState(0);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const activeWordRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const wordsWrapperRef = useRef<HTMLDivElement>(null);
+
+  const currentTotalChars = typedChars + userInput.length;
+  const currentAcc = currentTotalChars > 0 
+    ? Math.round(((currentTotalChars - mistakes) / currentTotalChars) * 100) 
+    : 100;
 
   const generateWordList = useCallback((limit: number | 'infinite') => {
     const actualLimit = limit === 'infinite' ? 50 : limit;
@@ -36,11 +42,11 @@ export default function TypingGame() {
     setCurrentIndex(0);
     setStartTime(null);
     setWpm(0);
-    setAccuracy(100);
     setIsFinished(false);
     setMistakes(0);
     setTypedChars(0);
     setHistory([]);
+    setTranslateY(0);
     setTimeout(() => inputRef.current?.focus(), 0);
   }, [wordLimit, generateWordList]);
 
@@ -48,10 +54,52 @@ export default function TypingGame() {
     resetGame();
   }, [resetGame, mode]);
 
+  const totalCharsRef = useRef(0);
+  totalCharsRef.current = currentTotalChars;
+
+  // Real-time WPM calculation
   useEffect(() => {
-    if (activeWordRef.current && containerRef.current) {
+    if (!startTime || isFinished) return;
+
+    const interval = setInterval(() => {
+      const durationInMinutes = (Date.now() - startTime) / 60000;
+      const currentWpm = Math.round((totalCharsRef.current / 5) / durationInMinutes) || 0;
+      setWpm(currentWpm);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [startTime, isFinished]);
+
+  useEffect(() => {
+    if (activeWordRef.current && wordsWrapperRef.current) {
       const activeWord = activeWordRef.current;
-      const containerRect = containerRef.current.getBoundingClientRect();
+      const wrapper = wordsWrapperRef.current;
+      const firstWord = wrapper.querySelector('.word') as HTMLElement;
+
+      if (firstWord) {
+        const firstTop = firstWord.offsetTop;
+        const currentTop = activeWord.offsetTop;
+        
+        const secondLineWord = Array.from(wrapper.querySelectorAll('.word')).find(
+          (child) => (child as HTMLElement).offsetTop > firstTop
+        ) as HTMLElement;
+
+        if (secondLineWord) {
+          const lineOffset = secondLineWord.offsetTop - firstTop;
+          if (currentTop > firstTop + lineOffset * 0.5) {
+            setTranslateY(-(currentTop - firstTop - lineOffset));
+          } else {
+            setTranslateY(0);
+          }
+        }
+      }
+    }
+  }, [currentIndex, words]);
+
+  useEffect(() => {
+    if (activeWordRef.current && wordsWrapperRef.current) {
+      const activeWord = activeWordRef.current;
+      const wrapperRect = wordsWrapperRef.current.getBoundingClientRect();
       const currentWordData = words[currentIndex];
       
       if (!currentWordData) return;
@@ -67,8 +115,8 @@ export default function TypingGame() {
         if (charElement) {
           const charRect = charElement.getBoundingClientRect();
           setCaretPos({
-            left: charRect.left - containerRect.left,
-            top: charRect.top - containerRect.top
+            left: charRect.left - wrapperRect.left,
+            top: charRect.top - wrapperRect.top
           });
         }
       } else {
@@ -76,13 +124,13 @@ export default function TypingGame() {
         if (lastChar) {
           const charRect = lastChar.getBoundingClientRect();
           setCaretPos({
-            left: charRect.right - containerRect.left,
-            top: charRect.top - containerRect.top
+            left: charRect.right - wrapperRect.left,
+            top: charRect.top - wrapperRect.top
           });
         }
       }
     }
-  }, [userInput, currentIndex, words, mode]);
+  }, [userInput, currentIndex, words, mode, translateY]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -129,16 +177,10 @@ export default function TypingGame() {
     const durationInMinutes = (endTime - (startTime || endTime)) / 60000;
     const finalWpm = Math.round((typedChars / 5) / durationInMinutes) || 0;
     setWpm(finalWpm);
-    
-    const totalPossibleChars = typedChars + userInput.length;
-    const finalAcc = totalPossibleChars > 0 
-      ? Math.round(((totalPossibleChars - mistakes) / totalPossibleChars) * 100) 
-      : 100;
-    setAccuracy(finalAcc);
   };
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-8 md:py-16 animate-in fade-in duration-500">
+    <main className="w-full max-w-4xl mx-auto px-4 py-4 md:py-8 h-full flex flex-col justify-center animate-in fade-in duration-500">
       {!isFinished ? (
         <div className="space-y-8 md:space-y-12">
           {/* Top Controls & Stats Bar */}
@@ -183,13 +225,13 @@ export default function TypingGame() {
                 wpm: <span className="text-main-monkey font-bold ml-1">{wpm}</span>
               </div>
               <div className="text-sub-monkey">
-                acc: <span className="text-main-monkey font-bold ml-1">{accuracy}%</span>
+                acc: <span className="text-main-monkey font-bold ml-1">{currentAcc}%</span>
               </div>
             </div>
           </div>
 
           <div 
-            className="relative p-6 md:p-8 rounded-2xl bg-bg-monkey/20 border border-sub-monkey/5 cursor-text min-h-[180px] md:min-h-[220px]"
+            className="relative p-6 md:p-8 rounded-2xl bg-bg-monkey/20 border border-sub-monkey/5 cursor-text h-[260px] md:h-[380px] overflow-hidden"
             onClick={() => inputRef.current?.focus()}
             ref={containerRef}
           >
@@ -204,10 +246,14 @@ export default function TypingGame() {
               autoComplete="off"
               spellCheck="false"
             />
-            
-            <div className="caret" style={{ left: caretPos.left, top: caretPos.top }}></div>
 
-            <div className="flex flex-wrap gap-x-4 gap-y-2 md:gap-x-6 md:gap-y-4 text-2xl md:text-3xl leading-relaxed transition-all duration-300">
+            <div 
+              className="relative flex flex-wrap gap-x-4 gap-y-2 md:gap-x-6 md:gap-y-4 text-2xl md:text-3xl leading-relaxed transition-transform duration-300 ease-in-out"
+              ref={wordsWrapperRef}
+              style={{ transform: `translateY(${translateY}px)` }}
+            >
+              <div className="caret" style={{ left: caretPos.left, top: caretPos.top }}></div>
+              
               {words.map((wordData, index) => (
                 <Word
                   key={`${wordData.latin}-${index}`}
@@ -235,7 +281,7 @@ export default function TypingGame() {
           </div>
         </div>
       ) : (
-        <Results wpm={wpm} accuracy={accuracy} onRestart={resetGame} />
+        <Results wpm={wpm} accuracy={currentAcc} onRestart={resetGame} />
       )}
     </main>
   );

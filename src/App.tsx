@@ -12,7 +12,7 @@ export default function App() {
         <Header />
         
         <div className="flex-1 w-full flex flex-col relative overflow-hidden">
-          <div className="flex-1 overflow-y-auto custom-scrollbar">
+          <div className="flex-1 overflow-hidden flex flex-col">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/typing" element={<TypingGame />} />

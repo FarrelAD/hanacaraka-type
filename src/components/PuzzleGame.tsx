@@ -245,15 +245,15 @@ export default function PuzzleGame() {
 
   return (
     <DndContext collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <div className="flex flex-col items-center gap-12 py-12">
+      <div className="w-full h-full flex flex-col justify-center items-center gap-6 md:gap-8 py-4 px-2">
         <div className="text-center">
-          <h2 className="text-sub-monkey text-xs uppercase tracking-[0.2em] mb-4 opacity-40">Puzzle Mode</h2>
-          <div className="text-4xl font-bold text-main-monkey font-ui italic">"{currentLevel.targetLatin}"</div>
+          <h2 className="text-sub-monkey text-xs uppercase tracking-[0.2em] mb-2 opacity-40">Puzzle Mode</h2>
+          <div className="text-3xl md:text-4xl font-bold text-main-monkey font-ui italic">"{currentLevel.targetLatin}"</div>
         </div>
 
         {/* Structured Grid */}
         <div className={`
-          relative w-72 h-72 md:w-80 md:h-80 grid grid-cols-3 grid-rows-3 gap-3 p-4 bg-bg-monkey/10 rounded-3xl border transition-all duration-500
+          relative w-64 h-64 md:w-80 md:h-80 grid grid-cols-3 grid-rows-3 gap-2 md:gap-3 p-3 md:p-4 bg-bg-monkey/10 rounded-3xl border transition-all duration-500
           ${isSuccess ? 'border-main-monkey/20 bg-main-monkey/2' : isError ? 'border-error-monkey/40 bg-error-monkey/2' : 'border-sub-monkey/5'}
         `}>
           <div />
@@ -268,7 +268,7 @@ export default function PuzzleGame() {
         </div>
 
         {/* Minimal Feedback */}
-        <div className="h-12 flex items-center justify-center">
+        <div className="h-10 flex items-center justify-center">
             {isSuccess ? (
               <span className="text-main-monkey uppercase tracking-[0.4em] font-bold text-xs">Correct</span>
             ) : hasAnyPiece ? (
@@ -282,12 +282,12 @@ export default function PuzzleGame() {
         </div>
 
         {/* Clean Tray */}
-        <div className="w-full max-w-xl px-4">
-          <div className="flex flex-wrap justify-center gap-4">
+        <div className="w-full max-w-xl px-2">
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
             {currentLevel.pieces.map((piece) => {
               const isUsed = Object.values(placedPieces).some(p => p?.id === piece.id);
               return (
-                <div key={piece.id} className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-2xl bg-bg-monkey/30 border border-sub-monkey/5">
+                <div key={piece.id} className="w-14 h-14 md:w-20 md:h-20 flex items-center justify-center rounded-2xl bg-bg-monkey/30 border border-sub-monkey/5">
                     <DraggablePiece piece={piece} isUsed={isUsed} isSuccess={isSuccess} className="w-full h-full flex items-center justify-center" />
                 </div>
               );
