@@ -2,19 +2,29 @@
 
 <img width="2560" height="1170" alt="image" src="https://github.com/user-attachments/assets/aa4fa111-c081-4411-97c9-fac8cf16ba79" />
 
+> ⚠️ **Experimental Prototype:** Please note that this project is currently in the experimental phase and serves as a prototype. It is not fully production-ready, so you might encounter some bugs or features that don't work perfectly!
 
-A simple game to learn Javanese script, "Hanacaraka", that bring to you on website application. The idea is simple. How about we try to type the Javanese script as fast as we can in a given time? The longer you play, you will more easily to recognize Javanese script.
+A minimalist, interactive typing game and puzzle built with React to make learning **Hanacaraka** (Javanese script) simple, fun, and engaging. 
+
+The core idea is straightforward: type the Javanese script as accurately and quickly as possible, and solve simple writing puzzles. Through repeated play and exposure, users will naturally build muscle memory and learn to recognize Hanacaraka characters seamlessly.
+
+##  Features
+
+- **Fast-paced Typing Gameplay**: Test your typing speed and accuracy with Hanacaraka characters.
+- **Hanacaraka Writing Puzzles**: Engage with simple puzzles designed to help you learn how to write the characters.
+- **Multiple Game Modes**: Practice with different word limits (10, 25, 50, 100) or try the infinite typing mode.
+- **Accessibility Focus**: Designed for an optimal experience across both desktop and mobile devices.
+
+## 🎮 Play Now
+
+You can try the game directly in your browser without any installation! 
+
+**https://farrelad.github.io/hanacaraka-type/**
 
 ## References
 
-The project idea is inspired by of some existing application. I try to adapted that idea to Javanese culture and the result is this web application. Here is the references:
+The project idea is inspired by some existing language learning and typing applications, adapted to promote Javanese culture:
 
-- [Monkeytype](https://monkeytype.com/)
-- [Duolingo](https://www.duolingo.com/)
-- Wibawa, J. A. E., Sarin, S., Li, C. F., Pipatsrisawat, K.,
-Sodimana, K., Kjartansson, O., Gutkin, A., Jansche, M., & Ha, L.
-(2018). *Building Open Javanese and Sundanese Corpora for Multilingual
-Text-to-Speech*. Proceedings of the Eleventh International Conference
-on Language Resources and Evaluation (LREC 2018), 1610–1614.
-http://www.lrec-conf.org/proceedings/lrec2018/pdf/8888.pdf
--...
+- [Monkeytype](https://monkeytype.com/) - For the core typing test mechanics and minimalist aesthetic.
+- [Duolingo](https://www.duolingo.com/) - Specifically inspired by their fun, puzzle-like approach to teaching Japanese scripts (Hiragana/Katakana), adapting that engaging learning style to Hanacaraka.
+- Wibawa, J. A. E., et al. (2018). *Building Open Javanese and Sundanese Corpora for Multilingual Text-to-Speech*. LREC 2018. [PDF Link](http://www.lrec-conf.org/proceedings/lrec2018/pdf/8888.pdf)
