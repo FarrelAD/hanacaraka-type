@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from '@/components/Header';
-import Home from '@/components/Home';
-import TypingGame from '@/components/TypingGame';
-import PuzzleGame from '@/components/PuzzleGame';
-import Footer from '@/components/Footer';
+import Header from '@/components/layout/Header';
+import Home from '@/pages/Home';
+import TypingGame from '@/features/typing-game/components/TypingGame';
+import PuzzleGame from '@/features/puzzle-game/components/PuzzleGame';
+import Footer from '@/components/layout/Footer';
 
 export default function App() {
   return (
