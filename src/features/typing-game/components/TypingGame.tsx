@@ -51,11 +51,16 @@ export default function TypingGame() {
   }, [wordLimit, generateWordList]);
 
   useEffect(() => {
-    resetGame();
+    const timer = setTimeout(() => {
+      resetGame();
+    }, 0);
+    return () => clearTimeout(timer);
   }, [resetGame, mode]);
 
   const totalCharsRef = useRef(0);
-  totalCharsRef.current = currentTotalChars;
+  useEffect(() => {
+    totalCharsRef.current = currentTotalChars;
+  }, [currentTotalChars]);
 
   // Real-time WPM calculation
   useEffect(() => {
@@ -132,7 +137,15 @@ export default function TypingGame() {
     }
   }, [userInput, currentIndex, words, mode, translateY]);
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const finishGame = useCallback(() => {
+    setIsFinished(true);
+    const endTime = Date.now();
+    const durationInMinutes = (endTime - (startTime || endTime)) / 60000;
+    const finalWpm = Math.round((typedChars / 5) / durationInMinutes) || 0;
+    setWpm(finalWpm);
+  }, [startTime, typedChars]);
+
+  const handleInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     
     if (isFinished) return;
@@ -169,15 +182,7 @@ export default function TypingGame() {
     } else {
       setUserInput(value);
     }
-  };
-
-  const finishGame = () => {
-    setIsFinished(true);
-    const endTime = Date.now();
-    const durationInMinutes = (endTime - (startTime || endTime)) / 60000;
-    const finalWpm = Math.round((typedChars / 5) / durationInMinutes) || 0;
-    setWpm(finalWpm);
-  };
+  }, [isFinished, startTime, words, currentIndex, wordLimit, generateWordList, finishGame]);
 
   return (
     <main className="w-full max-w-4xl mx-auto px-4 py-4 md:py-8 h-full flex flex-col justify-center animate-in fade-in duration-500">

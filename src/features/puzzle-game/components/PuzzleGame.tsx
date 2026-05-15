@@ -1,9 +1,6 @@
-import { useState, useEffect } from 'react';
-import type { CSSProperties } from 'react';
+import { useState } from 'react';
 import { 
   DndContext, 
-  useDraggable, 
-  useDroppable, 
   closestCenter,
   DragOverlay,
   useSensor,
@@ -13,7 +10,6 @@ import {
   type DragEndEvent,
   type DragStartEvent
 } from '@dnd-kit/core';
-import { CSS } from '@dnd-kit/utilities';
 import type { PuzzlePiece } from '@/types';
 import { PUZZLE_LEVELS } from '../data/puzzleData';
 import DroppableSlot from './DroppableSlot';

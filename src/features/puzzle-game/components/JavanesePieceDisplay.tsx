@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 
 const extractionCache = new Map<string, string>();
 
-export function extractDiacritic(char: string): string {
+function extractDiacritic(char: string): string {
   if (extractionCache.has(char)) return extractionCache.get(char)!;
 
+  // eslint-disable-next-line no-misleading-character-class
   const isDiacritic = /[\uA9B3-\uA9CD\uA9E5]/.test(char);
   if (!isDiacritic) return '';
 
