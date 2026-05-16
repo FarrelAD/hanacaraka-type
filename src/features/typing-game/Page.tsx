@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
-import Word from './Word';
-import Results from './Results';
-import { JAVANESE_WORDS_DATA } from '../data/words';
+import Word from './components/Word';
+import Results from './components/Results';
+import { JAVANESE_WORDS_DATA } from './data/words';
 import type { Mode, WordData } from '@/types';
 
-export default function TypingGame() {
+export default function Page() {
   const { t } = useTranslation();
   const [words, setWords] = useState<WordData[]>([]);
   const [userInput, setUserInput] = useState('');

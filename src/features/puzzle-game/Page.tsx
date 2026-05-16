@@ -12,12 +12,12 @@ import {
   type DragStartEvent
 } from '@dnd-kit/core';
 import type { PuzzlePiece } from '@/types';
-import { PUZZLE_LEVELS } from '../data/puzzleData';
-import DroppableSlot from './DroppableSlot';
-import DraggablePiece from './DraggablePiece';
-import JavanesePieceDisplay from './JavanesePieceDisplay';
+import { PUZZLE_LEVELS } from './data/puzzleData';
+import DroppableSlot from './components/DroppableSlot';
+import DraggablePiece from './components/DraggablePiece';
+import JavanesePieceDisplay from './components/JavanesePieceDisplay';
 
-export default function PuzzleGame() {
+export default function Page() {
   const { t } = useTranslation();
   const [currentLevelIdx, setCurrentLevelIdx] = useState(0);
   const [placedPieces, setPlacedPieces] = useState<{ [key: string]: PuzzlePiece | null }>({

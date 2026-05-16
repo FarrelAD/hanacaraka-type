@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from '@/components/layout/Header';
 import Home from '@/pages/Home';
-import TypingGame from '@/features/typing-game/components/TypingGame';
-import PuzzleGame from '@/features/puzzle-game/components/PuzzleGame';
+import { TypingGame } from '@/features/typing-game';
+import { PuzzleGame } from '@/features/puzzle-game';
 import NotFound from '@/pages/NotFound';
 import Footer from '@/components/layout/Footer';
 import ErrorBoundary from '@/components/common/ErrorBoundary';
