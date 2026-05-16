@@ -56,7 +56,7 @@ export const JAVANESE_WORDS_DATA: WordData[] = [
   { javanese: 'ꦱꦱꦶ', latin: 'sasi' },
   { javanese: 'ꦠꦲꦸꦤ꧀', latin: 'taun' },
   { javanese: 'ꦱꦲꦶꦏꦶ', latin: 'saiki' },
-  { javanese: 'ꦮꦶꦔ궶', latin: 'wingi' },
+  { javanese: 'ꦮꦶꦔꦶ', latin: 'wingi' },
   { javanese: 'ꦱꦼꦱꦸꦏ꧀', latin: 'sesuk' },
   { javanese: 'ꦱꦥ', latin: 'sapa' },
   { javanese: 'ꦲꦥ', latin: 'apa' },
