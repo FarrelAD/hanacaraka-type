@@ -1,6 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { withTranslation, type WithTranslation } from 'react-i18next';
 
-interface Props {
+interface Props extends WithTranslation {
   children: ReactNode;
 }
 
@@ -8,7 +9,7 @@ interface State {
   hasError: boolean;
 }
 
-export default class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false
   };
@@ -22,6 +23,8 @@ export default class ErrorBoundary extends Component<Props, State> {
   }
 
   public render() {
+    const { t } = this.props;
+
     if (this.state.hasError) {
       return (
         <div className="min-h-screen w-full flex flex-col items-center justify-center bg-bg-theme text-text-theme p-4 text-center">
@@ -30,15 +33,15 @@ export default class ErrorBoundary extends Component<Props, State> {
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-main-theme mb-2">Terjadi kesalahan sistem</h2>
+          <h2 className="text-2xl font-bold text-main-theme mb-2">{t('error.title')}</h2>
           <p className="text-sub-theme mb-8 max-w-sm">
-            Something went wrong. Don't worry, it's not your fault. Try refreshing the page.
+            {t('error.desc')}
           </p>
           <button
             onClick={() => window.location.reload()}
             className="px-8 py-3 bg-main-theme text-bg-theme rounded-xl font-bold text-sm uppercase tracking-widest hover:opacity-90 transition-all"
           >
-            Segarkan Halaman
+            {t('error.refresh')}
           </button>
         </div>
       );
@@ -47,3 +50,5 @@ export default class ErrorBoundary extends Component<Props, State> {
     return this.props.children;
   }
 }
+
+export default withTranslation()(ErrorBoundary);

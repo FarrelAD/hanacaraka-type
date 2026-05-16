@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useTranslation, Trans } from 'react-i18next';
 import Word from './Word';
 import Results from './Results';
 import { JAVANESE_WORDS_DATA } from '../data/words';
 import type { Mode, WordData } from '@/types';
 
 export default function TypingGame() {
+  const { t } = useTranslation();
   const [words, setWords] = useState<WordData[]>([]);
   const [userInput, setUserInput] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -227,10 +229,10 @@ export default function TypingGame() {
             {/* Stats */}
             <div className="flex items-center gap-6 font-ui text-lg">
               <div className="text-sub-theme">
-                wpm: <span className="text-main-theme font-bold ml-1">{wpm}</span>
+                {t('game.stats.wpm')}: <span className="text-main-theme font-bold ml-1">{wpm}</span>
               </div>
               <div className="text-sub-theme">
-                acc: <span className="text-main-theme font-bold ml-1">{currentAcc}%</span>
+                {t('game.stats.acc')}: <span className="text-main-theme font-bold ml-1">{currentAcc}%</span>
               </div>
             </div>
           </div>
@@ -279,9 +281,11 @@ export default function TypingGame() {
               type="button"
               onClick={resetGame}
               className="flex items-center gap-2 text-sub-theme hover:text-main-theme transition-colors text-xs font-ui"
-              title="Restart Test"
+              title={t('common.restart_hint').replace(/<\/?[^>]+(>|$)/g, "")}
             >
-              press <kbd className="bg-[#444] px-1.5 py-0.5 rounded text-gray-200">tab</kbd> to restart
+              <Trans i18nKey="common.restart_hint">
+                press <kbd className="bg-[#444] px-1.5 py-0.5 rounded text-gray-200">tab</kbd> to restart
+              </Trans>
             </button>
           </div>
         </div>

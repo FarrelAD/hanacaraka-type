@@ -1,6 +1,7 @@
 import { NGLEGENA, SANDHANGAN_SWARA, SANDHANGAN_PANYIGEG } from '@/data/reference';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 export default function ScriptReference({ 
   isOpen, onClose 
@@ -8,6 +9,8 @@ export default function ScriptReference({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const { t } = useTranslation();
+
   return (
     <>
       {/* Backdrop - lighter to keep context visible */}
@@ -19,7 +22,7 @@ export default function ScriptReference({
       {/* Side Drawer */}
       <div className={`fixed top-0 right-0 z-50 h-full w-full max-w-sm bg-bg-theme border-l border-sub-theme/20 shadow-2xl transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} overflow-y-auto p-6 md:p-8`}>
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-xl md:text-2xl font-bold text-main-theme">Script Guide</h2>
+          <h2 className="text-xl md:text-2xl font-bold text-main-theme">{t('guide.title')}</h2>
           <button 
             onClick={onClose}
             className="text-sub-theme hover:text-text-theme transition-colors p-1"
@@ -32,7 +35,7 @@ export default function ScriptReference({
         <div className="space-y-10">
           {/* Aksara Nglegena */}
           <section>
-            <h3 className="text-xs font-ui text-main-theme mb-4 uppercase tracking-[0.2em] font-bold">Aksara Nglegena</h3>
+            <h3 className="text-xs font-ui text-main-theme mb-4 uppercase tracking-[0.2em] font-bold">{t('guide.nglegena')}</h3>
             <div className="grid grid-cols-5 gap-2">
               {NGLEGENA.map((char) => (
                 <div key={char.latin} className="flex flex-col items-center bg-sub-theme/10 py-3 rounded-lg border border-transparent hover:border-main-theme/30 transition-all">
@@ -45,7 +48,7 @@ export default function ScriptReference({
 
           {/* Sandhangan Swara */}
           <section>
-            <h3 className="text-xs font-ui text-main-theme mb-4 uppercase tracking-[0.2em] font-bold">Vowels</h3>
+            <h3 className="text-xs font-ui text-main-theme mb-4 uppercase tracking-[0.2em] font-bold">{t('guide.vowels')}</h3>
             <div className="space-y-2">
               {SANDHANGAN_SWARA.map((char) => (
                 <div key={char.latin} className="flex items-center justify-between bg-sub-theme/10 px-4 py-2 rounded-lg">
@@ -61,7 +64,7 @@ export default function ScriptReference({
 
           {/* Sandhangan Panyigeg */}
           <section>
-            <h3 className="text-xs font-ui text-main-theme mb-4 uppercase tracking-[0.2em] font-bold">Final Consonants</h3>
+            <h3 className="text-xs font-ui text-main-theme mb-4 uppercase tracking-[0.2em] font-bold">{t('guide.consonants')}</h3>
             <div className="space-y-2">
               {SANDHANGAN_PANYIGEG.map((char) => (
                 <div key={char.description} className="flex items-center justify-between bg-sub-theme/10 px-4 py-2 rounded-lg">
@@ -77,8 +80,8 @@ export default function ScriptReference({
         </div>
 
         <div className="mt-12 pt-6 border-t border-sub-theme/20 text-[11px] text-sub-theme leading-relaxed font-ui">
-          <p className="mb-2"><strong className="text-text-theme">Hint:</strong> Javanese script is an abugida. Each character has an inherent "a" sound.</p>
-          <p>Modifiers (Sandhangan) are used to change or mute that vowel.</p>
+          <p className="mb-2"><strong className="text-text-theme">{t('guide.hint_label')}:</strong> {t('guide.hint_1')}</p>
+          <p>{t('guide.hint_2')}</p>
         </div>
       </div>
     </>

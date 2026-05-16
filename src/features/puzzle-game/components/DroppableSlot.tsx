@@ -1,4 +1,5 @@
 import { useDroppable } from '@dnd-kit/core';
+import { useTranslation } from 'react-i18next';
 import type { PuzzlePiece } from '@/types';
 import DraggablePiece from './DraggablePiece';
 
@@ -13,6 +14,7 @@ export default function DroppableSlot({
   onClear: () => void;
   isSuccess: boolean;
 }) {
+  const { t } = useTranslation();
   const { isOver, setNodeRef } = useDroppable({ id });
 
   return (
@@ -36,7 +38,7 @@ export default function DroppableSlot({
           )}
         </div>
       ) : (
-        <span className="text-[10px] uppercase font-ui text-sub-theme opacity-70 tracking-widest">{id}</span>
+        <span className="text-[10px] uppercase font-ui text-sub-theme opacity-70 tracking-widest">{t(`slots.${id}`)}</span>
       )}
     </div>
   );

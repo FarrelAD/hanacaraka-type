@@ -1,0 +1,62 @@
+{
+  "common": {
+    "typing": "Mengetik",
+    "puzzle": "Teka-teki",
+    "guide": "Panduan",
+    "restart_hint": "tekan <1>tab</1> untuk mengulang",
+    "restart_hint_results": "tekan <1>tab</1> atau <3>klik di sini</3> untuk mengulang"
+  },
+  "home": {
+    "typing_title": "Mengetik",
+    "typing_desc": "Latihan mengetik aksara Jawa",
+    "puzzle_title": "Teka-teki",
+    "puzzle_desc": "Susun rangkaian aksara Jawa"
+  },
+  "game": {
+    "wpm": "wpm",
+    "acc": "acc",
+    "test_finished": "tes selesai",
+    "stats": {
+      "wpm": "wpm",
+      "acc": "acc"
+    }
+  },
+  "notfound": {
+    "title": "Halaman tidak ditemukan",
+    "desc": "Halaman yang Anda cari mungkin telah dihapus, diubah namanya, atau sementara tidak tersedia.",
+    "back_home": "Kembali ke Beranda"
+  },
+  "error": {
+    "title": "Terjadi kesalahan sistem",
+    "desc": "Terjadi kesalahan. Jangan khawatir, itu bukan salah Anda. Coba segarkan halaman.",
+    "refresh": "Segarkan Halaman"
+  },
+  "guide": {
+    "title": "Panduan Aksara",
+    "nglegena": "Aksara Nglegena",
+    "vowels": "Sandhangan Swara",
+    "consonants": "Sandhangan Panyigeg",
+    "hint_label": "Petunjuk",
+    "hint_1": "Aksara Jawa adalah abugida. Setiap karakter memiliki bunyi bawaan 'a'.",
+    "hint_2": "Sandhangan digunakan untuk mengubah atau mematikan vokal tersebut."
+  },
+  "puzzle": {
+    "title": "Mode Teka-teki",
+    "correct": "Benar",
+    "check": "Cek jawaban",
+    "retry": "Coba lagi",
+    "level": "Level",
+    "finish_alert": "Selesai! Anda telah menguasai rangkaian dasar Hanacaraka!"
+  },
+  "footer": {
+    "view_source": "lihat sumber",
+    "developed_by": "dikembangkan oleh"
+  },
+  "slots": {
+    "base": "dasar",
+    "top": "atas",
+    "bottom": "bawah",
+    "front": "depan",
+    "rear": "belakang"
+  }
+}

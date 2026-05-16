@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { 
   DndContext, 
   closestCenter,
@@ -17,6 +18,7 @@ import DraggablePiece from './DraggablePiece';
 import JavanesePieceDisplay from './JavanesePieceDisplay';
 
 export default function PuzzleGame() {
+  const { t } = useTranslation();
   const [currentLevelIdx, setCurrentLevelIdx] = useState(0);
   const [placedPieces, setPlacedPieces] = useState<{ [key: string]: PuzzlePiece | null }>({
     base: null, front: null, top: null, bottom: null, rear: null,
@@ -83,7 +85,7 @@ export default function PuzzleGame() {
       setPlacedPieces({ base: null, front: null, top: null, bottom: null, rear: null });
       setIsSuccess(false);
     } else {
-      alert("Selesai! You've mastered the basic Hanacaraka clusters!");
+      alert(t('puzzle.finish_alert'));
       setCurrentLevelIdx(0);
       setPlacedPieces({ base: null, front: null, top: null, bottom: null, rear: null });
       setIsSuccess(false);
@@ -106,7 +108,7 @@ export default function PuzzleGame() {
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className="w-full h-full flex flex-col justify-center items-center gap-6 md:gap-8 py-4 px-2">
         <div className="text-center">
-          <h2 className="text-sub-theme text-xs uppercase tracking-[0.2em] mb-2 opacity-80">Puzzle Mode</h2>
+          <h2 className="text-sub-theme text-xs uppercase tracking-[0.2em] mb-2 opacity-80">{t('puzzle.title')}</h2>
           <div className="text-3xl md:text-4xl font-bold text-main-theme font-ui italic">"{currentLevel.targetLatin}"</div>
         </div>
 
@@ -129,13 +131,13 @@ export default function PuzzleGame() {
         {/* Minimal Feedback */}
         <div className="h-10 flex items-center justify-center">
             {isSuccess ? (
-              <span className="text-main-theme uppercase tracking-[0.4em] font-bold text-xs">Correct</span>
+              <span className="text-main-theme uppercase tracking-[0.4em] font-bold text-xs">{t('puzzle.correct')}</span>
             ) : hasAnyPiece ? (
               <button
                 type="button" onClick={validateAnswer}
-                className={`px-10 py-3 rounded-xl font-ui text-xs font-bold uppercase tracking-widest transition-all ${isError ? 'text-error-theme' : 'bg-main-theme/5 text-main-theme hover:bg-main-theme/10'}`}
+                className={`px-10 py-3 rounded-xl font-ui text-xs font-bold uppercase tracking-widest transition-all ${isError ? 'text-error-theme font-bold' : 'bg-main-theme/5 text-main-theme hover:bg-main-theme/10'}`}
               >
-                {isError ? 'Try again' : 'Check answer'}
+                {isError ? t('puzzle.retry') : t('puzzle.check')}
               </button>
             ) : null}
         </div>
@@ -162,7 +164,7 @@ export default function PuzzleGame() {
           ) : null}
         </DragOverlay>
 
-        <div className="text-sub-theme font-ui text-[10px] tracking-widest opacity-80 uppercase font-bold">Level {currentLevelIdx + 1}</div>
+        <div className="text-sub-theme font-ui text-[10px] tracking-widest opacity-80 uppercase font-bold">{t('puzzle.level')} {currentLevelIdx + 1}</div>
       </div>
     </DndContext>
   );

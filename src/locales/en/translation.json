@@ -1,0 +1,62 @@
+{
+  "common": {
+    "typing": "Typing",
+    "puzzle": "Puzzle",
+    "guide": "Guide",
+    "restart_hint": "press <1>tab</1> to restart",
+    "restart_hint_results": "press <1>tab</1> or <3>click here</3> to restart"
+  },
+  "home": {
+    "typing_title": "Typing",
+    "typing_desc": "Practice typing Javanese script",
+    "puzzle_title": "Puzzle",
+    "puzzle_desc": "Assemble Javanese character clusters"
+  },
+  "game": {
+    "wpm": "wpm",
+    "acc": "acc",
+    "test_finished": "test finished",
+    "stats": {
+      "wpm": "wpm",
+      "acc": "acc"
+    }
+  },
+  "notfound": {
+    "title": "Page not found",
+    "desc": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "back_home": "Back to Home"
+  },
+  "error": {
+    "title": "System error occurred",
+    "desc": "Something went wrong. Don't worry, it's not your fault. Try refreshing the page.",
+    "refresh": "Refresh Page"
+  },
+  "guide": {
+    "title": "Script Guide",
+    "nglegena": "Aksara Nglegena",
+    "vowels": "Vowels",
+    "consonants": "Final Consonants",
+    "hint_label": "Hint",
+    "hint_1": "Javanese script is an abugida. Each character has an inherent 'a' sound.",
+    "hint_2": "Modifiers (Sandhangan) are used to change or mute that vowel."
+  },
+  "puzzle": {
+    "title": "Puzzle Mode",
+    "correct": "Correct",
+    "check": "Check answer",
+    "retry": "Try again",
+    "level": "Level",
+    "finish_alert": "Finished! You've mastered the basic Hanacaraka clusters!"
+  },
+  "footer": {
+    "view_source": "view source",
+    "developed_by": "developed by"
+  },
+  "slots": {
+    "base": "base",
+    "top": "top",
+    "bottom": "bottom",
+    "front": "front",
+    "rear": "rear"
+  }
+}

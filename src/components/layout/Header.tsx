@@ -3,9 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { useTranslation } from 'react-i18next';
 import ScriptReference from '@/components/ScriptReference';
+import LanguageSwitcher from '@/components/common/LanguageSwitcher';
 
 export default function Header() {
+  const { t } = useTranslation();
   const location = useLocation();
   const [isGuideOpen, setIsGuideOpen] = useState(false);
 
@@ -28,12 +31,14 @@ export default function Header() {
               className="flex items-center gap-2 bg-main-theme text-bg-theme px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-opacity hover:cursor-pointer"
             >
               <FontAwesomeIcon icon={faBook} />
-              Guide
+              {t('common.guide')}
             </button>
           )}
         </div>
 
         <nav className="flex items-center gap-4 md:gap-6">
+          <LanguageSwitcher />
+          
           {!isHome && (
             <>
               <Link 
@@ -42,7 +47,7 @@ export default function Header() {
                   location.pathname === '/typing' ? 'text-main-theme' : 'text-sub-theme hover:text-text-theme'
                 }`}
               >
-                Typing
+                {t('common.typing')}
               </Link>
               <Link 
                 to="/puzzle" 
@@ -50,7 +55,7 @@ export default function Header() {
                   location.pathname === '/puzzle' ? 'text-main-theme' : 'text-sub-theme hover:text-text-theme'
                 }`}
               >
-                Puzzle
+                {t('common.puzzle')}
               </Link>
             </>
           )}

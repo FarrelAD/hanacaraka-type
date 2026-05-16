@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard, faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
+  const { t } = useTranslation();
+
   return (
     <main className="max-w-3xl mx-auto px-4 py-20 flex flex-col items-center justify-center min-h-[60vh]">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
@@ -15,10 +18,13 @@ export default function Home() {
             <FontAwesomeIcon icon={faKeyboard} className="h-10 w-10" />
           </div>
           <h2 className="text-xl font-bold text-text-theme font-ui tracking-widest uppercase">
-            Typing
+            {t('home.typing_title')}
           </h2>
+          <p className="text-xs text-sub-theme mt-2 text-center">
+            {t('home.typing_desc')}
+          </p>
         </Link>
-
+ 
         {/* Cluster Puzzle Card */}
         <Link 
           to="/puzzle"
@@ -28,8 +34,11 @@ export default function Home() {
             <FontAwesomeIcon icon={faPuzzlePiece} className="h-10 w-10" />
           </div>
           <h2 className="text-xl font-bold text-text-theme font-ui tracking-widest uppercase">
-            Puzzle
+            {t('home.puzzle_title')}
           </h2>
+          <p className="text-xs text-sub-theme mt-2 text-center">
+            {t('home.puzzle_desc')}
+          </p>
         </Link>
       </div>
     </main>
