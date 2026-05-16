@@ -57,7 +57,7 @@ export default function JavanesePieceDisplay({ char, type, className = "" }: { c
   }, [char, isDiacritic]);
 
   if (!isDiacritic) {
-    return <span className={`text-text-monkey ${className}`}>{char}</span>;
+    return <span className={`text-text-theme ${className}`}>{char}</span>;
   }
 
   return imgUrl ? (

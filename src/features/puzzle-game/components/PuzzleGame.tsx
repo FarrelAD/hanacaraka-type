@@ -106,14 +106,14 @@ export default function PuzzleGame() {
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className="w-full h-full flex flex-col justify-center items-center gap-6 md:gap-8 py-4 px-2">
         <div className="text-center">
-          <h2 className="text-sub-monkey text-xs uppercase tracking-[0.2em] mb-2 opacity-40">Puzzle Mode</h2>
-          <div className="text-3xl md:text-4xl font-bold text-main-monkey font-ui italic">"{currentLevel.targetLatin}"</div>
+          <h2 className="text-sub-theme text-xs uppercase tracking-[0.2em] mb-2 opacity-80">Puzzle Mode</h2>
+          <div className="text-3xl md:text-4xl font-bold text-main-theme font-ui italic">"{currentLevel.targetLatin}"</div>
         </div>
 
         {/* Structured Grid */}
         <div className={`
-          relative w-64 h-64 md:w-80 md:h-80 grid grid-cols-3 grid-rows-3 gap-2 md:gap-3 p-3 md:p-4 bg-bg-monkey/10 rounded-3xl border transition-all duration-500
-          ${isSuccess ? 'border-main-monkey/20 bg-main-monkey/2' : isError ? 'border-error-monkey/40 bg-error-monkey/2' : 'border-sub-monkey/5'}
+          relative w-64 h-64 md:w-80 md:h-80 grid grid-cols-3 grid-rows-3 gap-2 md:gap-3 p-3 md:p-4 bg-sub-theme/5 rounded-3xl border transition-all duration-500
+          ${isSuccess ? 'border-main-theme/20 bg-main-theme/2' : isError ? 'border-error-theme/40 bg-error-theme/2' : 'border-sub-theme/20'}
         `}>
           <div />
           <DroppableSlot id="top" piece={placedPieces.top} onClear={() => setPlacedPieces(p => ({...p, top: null}))} isSuccess={isSuccess} />
@@ -129,11 +129,11 @@ export default function PuzzleGame() {
         {/* Minimal Feedback */}
         <div className="h-10 flex items-center justify-center">
             {isSuccess ? (
-              <span className="text-main-monkey uppercase tracking-[0.4em] font-bold text-xs">Correct</span>
+              <span className="text-main-theme uppercase tracking-[0.4em] font-bold text-xs">Correct</span>
             ) : hasAnyPiece ? (
               <button
                 type="button" onClick={validateAnswer}
-                className={`px-10 py-3 rounded-xl font-ui text-xs font-bold uppercase tracking-widest transition-all ${isError ? 'text-error-monkey' : 'bg-main-monkey/5 text-main-monkey hover:bg-main-monkey/10'}`}
+                className={`px-10 py-3 rounded-xl font-ui text-xs font-bold uppercase tracking-widest transition-all ${isError ? 'text-error-theme' : 'bg-main-theme/5 text-main-theme hover:bg-main-theme/10'}`}
               >
                 {isError ? 'Try again' : 'Check answer'}
               </button>
@@ -146,7 +146,7 @@ export default function PuzzleGame() {
             {currentLevel.pieces.map((piece) => {
               const isUsed = Object.values(placedPieces).some(p => p?.id === piece.id);
               return (
-                <div key={piece.id} className="w-14 h-14 md:w-20 md:h-20 flex items-center justify-center rounded-2xl bg-bg-monkey/30 border border-sub-monkey/5">
+                <div key={piece.id} className="w-14 h-14 md:w-20 md:h-20 flex items-center justify-center rounded-2xl bg-transparent border border-sub-theme/30">
                     <DraggablePiece piece={piece} isUsed={isUsed} isSuccess={isSuccess} className="w-full h-full flex items-center justify-center" />
                 </div>
               );
@@ -156,13 +156,13 @@ export default function PuzzleGame() {
 
         <DragOverlay dropAnimation={null}>
           {activePiece ? (
-            <div className="w-20 h-20 bg-bg-monkey/95 border border-sub-monkey/20 rounded-2xl flex items-center justify-center">
+            <div className="w-20 h-20 bg-bg-theme/95 border border-sub-theme/20 rounded-2xl flex items-center justify-center">
               <JavanesePieceDisplay char={activePiece.char} type={activePiece.type} className="text-4xl font-javanese" />
             </div>
           ) : null}
         </DragOverlay>
 
-        <div className="text-sub-monkey font-ui text-[10px] tracking-widest opacity-20 uppercase font-bold">Level {currentLevelIdx + 1}</div>
+        <div className="text-sub-theme font-ui text-[10px] tracking-widest opacity-80 uppercase font-bold">Level {currentLevelIdx + 1}</div>
       </div>
     </DndContext>
   );

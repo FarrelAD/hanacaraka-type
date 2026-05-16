@@ -9,12 +9,12 @@ export default function Home() {
         {/* Typing Practice Card */}
         <Link 
           to="/typing"
-          className="flex flex-col items-center justify-center p-8 bg-bg-monkey/20 rounded-2xl border border-sub-monkey/40 hover:border-main-monkey/50 hover:bg-bg-monkey/30 transition-all duration-200 hover:-translate-y-1"
+          className="flex flex-col items-center justify-center p-8 bg-bg-theme/20 rounded-2xl border border-sub-theme/40 hover:border-main-theme/50 hover:bg-bg-theme/30 transition-all duration-200 hover:-translate-y-1"
         >
-          <div className="mb-4 text-sub-monkey">
+          <div className="mb-4 text-sub-theme">
             <FontAwesomeIcon icon={faKeyboard} className="h-10 w-10" />
           </div>
-          <h2 className="text-xl font-bold text-text-monkey font-ui tracking-widest uppercase">
+          <h2 className="text-xl font-bold text-text-theme font-ui tracking-widest uppercase">
             Typing
           </h2>
         </Link>
@@ -22,12 +22,12 @@ export default function Home() {
         {/* Cluster Puzzle Card */}
         <Link 
           to="/puzzle"
-          className="flex flex-col items-center justify-center p-8 bg-bg-monkey/20 rounded-2xl border border-sub-monkey/40 hover:border-main-monkey/50 hover:bg-bg-monkey/30 transition-all duration-200 hover:-translate-y-1"
+          className="flex flex-col items-center justify-center p-8 bg-bg-theme/20 rounded-2xl border border-sub-theme/40 hover:border-main-theme/50 hover:bg-bg-theme/30 transition-all duration-200 hover:-translate-y-1"
         >
-          <div className="mb-4 text-sub-monkey">
+          <div className="mb-4 text-sub-theme">
             <FontAwesomeIcon icon={faPuzzlePiece} className="h-10 w-10" />
           </div>
-          <h2 className="text-xl font-bold text-text-monkey font-ui tracking-widest uppercase">
+          <h2 className="text-xl font-bold text-text-theme font-ui tracking-widest uppercase">
             Puzzle
           </h2>
         </Link>

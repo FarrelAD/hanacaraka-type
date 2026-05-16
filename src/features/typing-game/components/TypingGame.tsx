@@ -189,17 +189,17 @@ export default function TypingGame() {
       {!isFinished ? (
         <div className="space-y-8 md:space-y-12">
           {/* Top Controls & Stats Bar */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-bg-monkey py-2">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-bg-theme py-2">
             <div className="flex items-center gap-6">
               {/* Mode Toggle */}
-              <div className="flex bg-bg-monkey/40 rounded-lg overflow-hidden">
+              <div className="flex bg-bg-theme/40 rounded-lg overflow-hidden">
                 {(['latin', 'hanacaraka'] as const).map((m) => (
                   <button
                     key={m}
                     type="button"
                     onClick={() => setMode(m)}
                     className={`px-4 py-1.5 text-xs font-ui transition-colors ${
-                      mode === m ? 'bg-main-monkey text-bg-monkey' : 'text-sub-monkey hover:text-text-monkey bg-bg-monkey/20'
+                      mode === m ? 'bg-main-theme text-bg-theme' : 'text-sub-theme hover:text-text-theme bg-bg-theme/20'
                     }`}
                   >
                     {m}
@@ -215,7 +215,7 @@ export default function TypingGame() {
                     type="button"
                     onClick={() => setWordLimit(limit)}
                     className={`text-xs font-ui transition-colors ${
-                      wordLimit === limit ? 'text-main-monkey font-bold' : 'text-sub-monkey hover:text-text-monkey'
+                      wordLimit === limit ? 'text-main-theme font-bold' : 'text-sub-theme hover:text-text-theme'
                     }`}
                   >
                     {limit}
@@ -226,17 +226,17 @@ export default function TypingGame() {
 
             {/* Stats */}
             <div className="flex items-center gap-6 font-ui text-lg">
-              <div className="text-sub-monkey">
-                wpm: <span className="text-main-monkey font-bold ml-1">{wpm}</span>
+              <div className="text-sub-theme">
+                wpm: <span className="text-main-theme font-bold ml-1">{wpm}</span>
               </div>
-              <div className="text-sub-monkey">
-                acc: <span className="text-main-monkey font-bold ml-1">{currentAcc}%</span>
+              <div className="text-sub-theme">
+                acc: <span className="text-main-theme font-bold ml-1">{currentAcc}%</span>
               </div>
             </div>
           </div>
 
           <div 
-            className="relative p-6 md:p-8 rounded-2xl bg-bg-monkey/20 border border-sub-monkey/5 cursor-text h-[260px] md:h-[380px] overflow-hidden"
+            className="relative p-6 md:p-8 rounded-2xl bg-bg-theme/20 border border-sub-theme/5 cursor-text h-[260px] md:h-[380px] overflow-hidden"
             onClick={() => inputRef.current?.focus()}
             ref={containerRef}
           >
@@ -278,7 +278,7 @@ export default function TypingGame() {
              <button
               type="button"
               onClick={resetGame}
-              className="flex items-center gap-2 text-sub-monkey hover:text-main-monkey transition-colors text-xs font-ui"
+              className="flex items-center gap-2 text-sub-theme hover:text-main-theme transition-colors text-xs font-ui"
               title="Restart Test"
             >
               press <kbd className="bg-[#444] px-1.5 py-0.5 rounded text-gray-200">tab</kbd> to restart

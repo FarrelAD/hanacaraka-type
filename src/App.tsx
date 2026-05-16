@@ -8,7 +8,7 @@ import Footer from '@/components/layout/Footer';
 export default function App() {
   return (
     <Router basename={import.meta.env.BASE_URL}>
-      <div className="h-dvh overflow-hidden flex flex-col bg-bg-monkey text-text-monkey font-mono selection:bg-main-monkey/30 selection:text-main-monkey">
+      <div className="h-dvh overflow-hidden flex flex-col bg-bg-theme text-text-theme font-mono selection:bg-main-theme/30 selection:text-main-theme">
         <Header />
         
         <div className="flex-1 w-full flex flex-col relative overflow-hidden">

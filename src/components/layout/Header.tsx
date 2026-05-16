@@ -16,8 +16,8 @@ export default function Header() {
       <header className="w-full px-6 lg:px-12 pt-8 md:pt-12 flex flex-wrap gap-4 items-center justify-between">
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-3">
-            <h1 className="text-xl md:text-2xl font-bold text-text-monkey font-ui tracking-tighter">
-              hanacaraka<span className="text-main-monkey">type</span>
+            <h1 className="text-xl md:text-2xl font-bold text-text-theme font-ui tracking-tighter">
+              hanacaraka<span className="text-main-theme">type</span>
             </h1>
           </Link>
           
@@ -25,7 +25,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setIsGuideOpen(true)}
-              className="flex items-center gap-2 bg-main-monkey text-bg-monkey px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-opacity hover:cursor-pointer"
+              className="flex items-center gap-2 bg-main-theme text-bg-theme px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-opacity hover:cursor-pointer"
             >
               <FontAwesomeIcon icon={faBook} />
               Guide
@@ -39,7 +39,7 @@ export default function Header() {
               <Link 
                 to="/typing" 
                 className={`text-xs font-ui font-bold uppercase tracking-widest transition-colors hidden sm:block ${
-                  location.pathname === '/typing' ? 'text-main-monkey' : 'text-sub-monkey hover:text-text-monkey'
+                  location.pathname === '/typing' ? 'text-main-theme' : 'text-sub-theme hover:text-text-theme'
                 }`}
               >
                 Typing
@@ -47,7 +47,7 @@ export default function Header() {
               <Link 
                 to="/puzzle" 
                 className={`text-xs font-ui font-bold uppercase tracking-widest transition-colors hidden sm:block ${
-                  location.pathname === '/puzzle' ? 'text-main-monkey' : 'text-sub-monkey hover:text-text-monkey'
+                  location.pathname === '/puzzle' ? 'text-main-theme' : 'text-sub-theme hover:text-text-theme'
                 }`}
               >
                 Puzzle
@@ -58,7 +58,7 @@ export default function Header() {
             href="https://github.com/FarrelAD/hanacaraka-type" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-sub-monkey hover:text-main-monkey transition-colors p-1 ml-2"
+            className="text-sub-theme hover:text-main-theme transition-colors p-1 ml-2"
             title="View Source"
           >
             <FontAwesomeIcon icon={faGithub} className="w-5 h-5" />

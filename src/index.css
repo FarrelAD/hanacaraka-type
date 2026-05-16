@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-monkey: #323437;
-  --color-main-monkey: #e2b714;
-  --color-sub-monkey: #646669;
-  --color-text-monkey: #d1d0c5;
-  --color-error-monkey: #ca4754;
-  --color-error-extra-monkey: #793e44;
+  --color-bg-theme: #FDFBF7;
+  --color-main-theme: #864826;
+  --color-sub-theme: #DCA462;
+  --color-text-theme: #260B06;
+  --color-error-theme: #D34848;
+  --color-error-extra-theme: #9B3B3B;
   
   --font-javanese: 'Noto Sans Javanese', serif;
   --font-ui: 'Inter', sans-serif;
@@ -14,12 +14,12 @@
 
 @layer base {
   body {
-    @apply bg-bg-monkey text-text-monkey font-ui;
+    @apply bg-bg-theme text-text-theme font-ui;
   }
 }
 
 .caret {
-  @apply absolute w-[2px] h-10 md:h-16 bg-main-monkey transition-all duration-75;
+  @apply absolute w-[2px] h-10 md:h-16 bg-main-theme transition-all duration-75;
   animation: blink 1s infinite;
 }
 
@@ -57,11 +57,11 @@
 }
 
 .word {
-  @apply text-sub-monkey relative whitespace-nowrap;
+  @apply text-sub-theme relative whitespace-nowrap;
 }
 
 .word.active {
-  @apply text-sub-monkey;
+  @apply text-sub-theme;
 }
 
 .char {
@@ -69,17 +69,17 @@
 }
 
 .char.correct {
-  @apply text-text-monkey;
+  @apply text-text-theme;
 }
 
 .char.partial {
-  @apply text-text-monkey/50;
+  @apply text-text-theme/50;
 }
 
 .char.incorrect {
-  @apply text-error-monkey;
+  @apply text-error-theme;
 }
 
 .char.extra {
-  @apply text-error-extra-monkey;
+  @apply text-error-extra-theme;
 }
