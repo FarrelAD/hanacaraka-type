@@ -1,6 +1,7 @@
 # Hanacaraka Typing Test Game
 
-<img width="2560" height="1170" alt="image" src="https://github.com/user-attachments/assets/aa4fa111-c081-4411-97c9-fac8cf16ba79" />
+<img width="2559" height="1245" alt="image" src="https://github.com/user-attachments/assets/5aa5bd6c-88aa-4375-877c-bde54f46d396" />
+
 
 > ⚠️ **Experimental Prototype:** Please note that this project is currently in the experimental phase and serves as a prototype. It is not fully production-ready, so you might encounter some bugs or features that don't work perfectly!
 
